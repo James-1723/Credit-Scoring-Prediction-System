@@ -1,0 +1,33 @@
+# 檔案總覽
+## 資料夾
+1. gbmvenv: Python 虛擬環境，勿動
+2. HappyML: 函式庫，勿動
+3. Models: 模型檔儲存資料夾
+4. Result csv: 檔案輸出的資料夾，程式碼執行結束後生成的預測分數csv檔會存放於此資料夾中
+5. Source csv: 輸入檔案的資料集，把要預測的資料放進資料夾內
+6. Temporary file: 臨時生成資料夾，勿動
+## 檔案
+1. gbm_prediction.py: 預測主程式
+2. NotoSansTC: 字體檔案
+# 執行教學
+## 檔案路徑更改
+> 請先打開gbm_prediction.py，程式碼在導入函式庫後，下方的區塊為檔案路徑的定義，請先將route_prefix改成您電腦中Prediction資料夾的絕對路徑
+1. 測資（file_path）: Source csv 中已經有測試用的資料集，使用者可以把想預測的資料直接放進資料夾內，更改絕對路徑即可與檔名，以下為Source csv中測試資料的說明
+    - 多筆測資: test.csv
+    - 單一測資: test_single.csv
+    - 完整測資: 客戶基本資料 10201-11305.csv
+假設現在要預測一個名為'data.csv'的檔案，只要把```file_path```改為```file_path = f"{route_prefix}Source csv/data.csv"```
+2. 其餘路徑：更改route_prefix後不必特別更動，輸出的csv檔會存於```Result csv```資料夾中
+## 程式碼執行
+1. 進入資料夾：
+    - 法一：打開檔案總管，找到Prediction資料夾，點擊右鍵，選擇開啟資料夾的終端機畫面
+    - 法二：右鍵點擊Prediction資料夾，複製絕對路徑後打開cmd，輸入```cd your_path```
+2. 使用虛擬環境：輸入下方指令，啟動虛擬環境
+    ```source gbmvenv/bin/activate```
+3. 執行程式碼：輸入下列指令執行程式碼
+    ```python gbm_prediction.py```
+# 輸出說明
+## prediction.csv
+> 此份csv包含了原始資料的流水號與原始分數，並把預測分數與對應的違約率置於右方欄位
+## prediction_with_shap.csv
+> 除了預測分數，每一筆資料進行預測時影響力前五大的特徵也會被印製於右方
